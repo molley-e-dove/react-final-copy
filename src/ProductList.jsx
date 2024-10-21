@@ -4,7 +4,7 @@ import CartItem from './CartItem';
 function ProductList() {
     const [showCart, setShowCart] = useState(false); 
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
-
+    //Hello There
     const plantsArray = [
         {
             category: "Air Purifying Plants",
