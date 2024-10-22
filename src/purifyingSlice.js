@@ -41,13 +41,13 @@ export const purifyingSlice = createSlice({
         }
     ],
     reducers: {
-        incrementQuantitity: (state, action ) => {
+        incrementpurifyingQuantity: (state, action ) => {
             const item = state[action.payload];
             if(item) {
                 item.quantity ++; 
             }
         },
-        decrementQuantity: (state, action) => {
+        decrementpurifyingQuantity: (state, action) => {
             const item = state[action.payload];
             if(item[index] && item[index].quantity >0) {
                 item.quantity --;

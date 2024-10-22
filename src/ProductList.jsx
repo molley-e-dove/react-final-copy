@@ -2,147 +2,33 @@ import React, { useState,useEffect } from 'react';
 import './ProductList.css'
 import CartItem from './CartItem';
 import {useDispatch } from 'react-redux';
-import {incrementrepellantQuantitity, decrementrepellantQuantity} from './purifyingSlice';
+import {incrementaromaticQuantity, decrementaromaticQuantity} from './aromaticSlice';
+
+import {incrementmaintenanceQuantity, decrementmaintenanceQuantity} from './maintenanceSlice'
+
+import {incrementmedicinalQuantitity, decrementmedicinalQuantity} from './medicinalSlice';
+
 import {incrementpurifyingQuantity, decrementpurifyingQuantity} from './purifyingSlice';
 
+import {incrementrepellantQuantitity, decrementrepellantQuantity} from './repellantSlice';
 
-
+import { addItem } from './CartSlice';
 import { useSelector } from 'react-redux';
+
+
 function ProductList() {
+    const aromaticItems = useSelector((state) => state.aromatic);
+    //The useSelector() function retrieves venue items from the Redux store state.
+    const maintenanceItems = useSelector((state) => state.maintenance);
+    const medicinalItems = useSelector((state) => state.medicinal);
     const purifyingItems  = useSelector((state) => state.purifying);
     const repellantItems  = useSelector((state) => state.repellant);
+    
     const dispatch = useDispatch();
     const [showCart, setShowCart] = useState(false); 
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
-    //Hello There
-    const plantsArray = [
-        
-        {
-            category: "Aromatic Fragrant Plants",
-            plants: [
-                {
-                    name: "Lavender",
-                    image: "https://images.unsplash.com/photo-1611909023032-2d6b3134ecba?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                    description: "Calming scent, used in aromatherapy.",
-                    cost: "$20"
-                },
-                {
-                    name: "Jasmine",
-                    image: "https://images.unsplash.com/photo-1592729645009-b96d1e63d14b?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                    description: "Sweet fragrance, promotes relaxation.",
-                    cost: "$18"
-                },
-                {
-                    name: "Rosemary",
-                    image: "https://cdn.pixabay.com/photo/2019/10/11/07/12/rosemary-4541241_1280.jpg",
-                    description: "Invigorating scent, often used in cooking.",
-                    cost: "$15"
-                },
-                {
-                    name: "Mint",
-                    image: "https://cdn.pixabay.com/photo/2016/01/07/18/16/mint-1126282_1280.jpg",
-                    description: "Refreshing aroma, used in teas and cooking.",
-                    cost: "$12"
-                },
-                {
-                    name: "Lemon Balm",
-                    image: "https://cdn.pixabay.com/photo/2019/09/16/07/41/balm-4480134_1280.jpg",
-                    description: "Citrusy scent, relieves stress and promotes sleep.",
-                    cost: "$14"
-                },
-                {
-                    name: "Hyacinth",
-                    image: "https://cdn.pixabay.com/photo/2019/04/07/20/20/hyacinth-4110726_1280.jpg",
-                    description: "Hyacinth is a beautiful flowering plant known for its fragrant.",
-                    cost: "$22"
-                }
-            ]
-        },
-        
-        {
-            category: "Medicinal Plants",
-            plants: [
-                {
-                    name: "Aloe Vera",
-                    image: "https://cdn.pixabay.com/photo/2018/04/02/07/42/leaf-3283175_1280.jpg",
-                    description: "Soothing gel used for skin ailments.",
-                    cost: "$14"
-                },
-                {
-                    name: "Echinacea",
-                    image: "https://cdn.pixabay.com/photo/2014/12/05/03/53/echinacea-557477_1280.jpg",
-                    description: "Boosts immune system, helps fight colds.",
-                    cost: "$16"
-                },
-                {
-                    name: "Peppermint",
-                    image: "https://cdn.pixabay.com/photo/2017/07/12/12/23/peppermint-2496773_1280.jpg",
-                    description: "Relieves digestive issues and headaches.",
-                    cost: "$13"
-                },
-                {
-                    name: "Lemon Balm",
-                    image: "https://cdn.pixabay.com/photo/2019/09/16/07/41/balm-4480134_1280.jpg",
-                    description: "Calms nerves and promotes relaxation.",
-                    cost: "$14"
-                },
-                {
-                    name: "Chamomile",
-                    image: "https://cdn.pixabay.com/photo/2016/08/19/19/48/flowers-1606041_1280.jpg",
-                    description: "Soothes anxiety and promotes sleep.",
-                    cost: "$15"
-                },
-                {
-                    name: "Calendula",
-                    image: "https://cdn.pixabay.com/photo/2019/07/15/18/28/flowers-4340127_1280.jpg",
-                    description: "Heals wounds and soothes skin irritations.",
-                    cost: "$12"
-                }
-            ]
-        },
-        {
-            category: "Low Maintenance Plants",
-            plants: [
-                {
-                    name: "ZZ Plant",
-                    image: "https://images.unsplash.com/photo-1632207691143-643e2a9a9361?q=80&w=464&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                    description: "Thrives in low light and requires minimal watering.",
-                    cost: "$25"
-                },
-                {
-                    name: "Pothos",
-                    image: "https://cdn.pixabay.com/photo/2018/11/15/10/32/plants-3816945_1280.jpg",
-                    description: "Tolerates neglect and can grow in various conditions.",
-                    cost: "$10"
-                },
-                {
-                    name: "Snake Plant",
-                    image: "https://cdn.pixabay.com/photo/2021/01/22/06/04/snake-plant-5939187_1280.jpg",
-                    description: "Needs infrequent watering and is resilient to most pests.",
-                    cost: "$15"
-                },
-                {
-                    name: "Cast Iron Plant",
-                    image: "https://cdn.pixabay.com/photo/2017/02/16/18/04/cast-iron-plant-2072008_1280.jpg",
-                    description: "Hardy plant that tolerates low light and neglect.",
-                    cost: "$20"
-                },
-                {
-                    name: "Succulents",
-                    image: "https://cdn.pixabay.com/photo/2016/11/21/16/05/cacti-1846147_1280.jpg",
-                    description: "Drought-tolerant plants with unique shapes and colors.",
-                    cost: "$18"
-                },
-                {
-                    name: "Aglaonema",
-                    image: "https://cdn.pixabay.com/photo/2014/10/10/04/27/aglaonema-482915_1280.jpg",
-                    description: "Requires minimal care and adds color to indoor spaces.",
-                    cost: "$22"
-                }
-            ]
-        }
-    ];
-   const styleObj={
+   
+    const styleObj={
     backgroundColor: '#4CAF50',
     color: '#fff!important',
     padding: '15px',
@@ -176,18 +62,26 @@ const handlePlantsClick = (e) => {
     e.preventDefault();
     setShowCart(false);
   };
-  const handeIncrementrepellantQuantity = (index) => {
-    dispatchEvent(incrementrepellantQuantitity(index));
-  }
-  const handleDecrementrepellantQuantity = (index) => {
-    dispatch(decrementrepellantQuantity(index));
-  }
+  const [addedToCart, setAddedToCart] = useState( {});
+
+  const handleAddToCart = (product) => {
+    dispatch(addItem(product));
+    setAddedToCart((prevState) => ({
+        ...prevState,
+        [product.name]: true,
+    }))
+  };
+
+ 
   const handeIncrementpurifyingQuantity = (index) => {
     dispatchEvent(incrementpurifyingQuantity(index));
-  }
+  };
   const handleDecrementpurifyingQuantity = (index) => {
     dispatch(decrementpurifyingQuantity(index));
-  }
+  };
+  const handletotalcost = (index) => {
+
+  };
     return (
         <div>
              <div className="navbar" style={styleObj}>
@@ -213,47 +107,18 @@ const handlePlantsClick = (e) => {
             <div className='text'>
                 <h1> Air Purifying Plants</h1>
             </div>
-            <div className='purifying-section'>
+            <div className='product-list'>
                 {purifyingItems.map((item, index) => (
-                    <div key = {index}>
+                    <div className= 'product-card' key = {index}>
                         <h1><div> {item.name}</div></h1>
-                            <div className=' product-card' key = {plantIndex}>
-                                <img className='product-image' src={plant.image} alt ={plant.name} />
-                                <div className='product-title'> {plant.name}</div>
-                                <div className="text">{plant.description}</div>
-                                <div>${plant.cost}</div>
-                                <button className='product-button' onClick={ () => handleAddToCart(plant)}>Add to Cart </button> 
-                            </div>
+                        <img className='product-image' src={item.image} alt ={item.name} />
+                        <div className='product-title'> {item.name}</div>
+                        <div className="text">{item.description}</div>
+                        <div>{item.cost}</div>
+                        <button className='product-button' onClick={ () => handleAddToCart(item)}>Add to Cart </button> 
                     </div>   
                 ))}
             </div>
-
-
-            <div id="repellant" className='reppellant_container'>
-                <div className='text'>
-                    <h1> Repellant Plants </h1>
-                </div>
-                <div className='reppellant_plants'>
-                </div>
-            </div>
-
-            <div id="repellant" className='reppellant_container'>
-                <div className='text'>
-                    <h1> Repellant Plants </h1>
-                </div>
-                <div className='reppellant_plants'>
-                </div>
-            </div>
-
-            <div id="repellant" className='reppellant_container'>
-                <div className='text'>
-                    <h1> Repellant Plants </h1>
-                </div>
-                <div className='reppellant_plants'>
-                </div>
-            </div>
-
-
         </div>
  ) :  (
     <CartItem onContinueShopping={handleContinueShopping}/>
