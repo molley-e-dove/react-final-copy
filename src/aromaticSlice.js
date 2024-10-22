@@ -7,19 +7,19 @@ export const aromaticSlice = createSlice({
             name: "Lavender",
             image: "https://images.unsplash.com/photo-1611909023032-2d6b3134ecba?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
             description: "Calming scent, used in aromatherapy.",
-            cost: "$20"
+            cost: "20"
         },
         {
             name: "Jasmine",
             image: "https://images.unsplash.com/photo-1592729645009-b96d1e63d14b?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
             description: "Sweet fragrance, promotes relaxation.",
-            cost: "$18"
+            cost: "18"
         },
         {
             name: "Rosemary",
             image: "https://cdn.pixabay.com/photo/2019/10/11/07/12/rosemary-4541241_1280.jpg",
             description: "Invigorating scent, often used in cooking.",
-            cost: "$15"
+            cost: "15"
         },
         {
             name: "Mint",

@@ -16,6 +16,7 @@ import { addItem } from './CartSlice';
 import { useSelector } from 'react-redux';
 
 
+
 function ProductList() {
     const aromaticItems = useSelector((state) => state.aromatic);
     //The useSelector() function retrieves venue items from the Redux store state.
@@ -114,7 +115,7 @@ const handlePlantsClick = (e) => {
                         <img className='product-image' src={item.image} alt ={item.name} />
                         <div className='product-title'> {item.name}</div>
                         <div className="text">{item.description}</div>
-                        <div>{item.cost}</div>
+                        <div>${item.cost}</div>
                         <button className='product-button' onClick={ () => handleAddToCart(item)}>Add to Cart </button> 
                     </div>   
                 ))}
