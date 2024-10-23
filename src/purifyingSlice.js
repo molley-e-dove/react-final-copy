@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const purifyingSlice = createSlice({
-    name: "purifyingSlice",
+    name: "purifying",
     initialState: [
         {
             name: "Snake Plant",
@@ -42,15 +42,15 @@ export const purifyingSlice = createSlice({
     ],
     reducers: {
         incrementpurifyingQuantity: (state, action ) => {
-            const item = state[action.payload];
-            if(item) {
-                item.quantity ++; 
+            const { payload: index} = action;
+            if(state[index]) {
+                console.log("We Got here ");
             }
         },
         decrementpurifyingQuantity: (state, action) => {
-            const item = state[action.payload];
-            if(item[index] && item[index].quantity >0) {
-                item.quantity --;
+            const { payload: index} = action;
+            if(state[index] && state[index.quantity] > 0) {
+                console.log("Actually Here");
             }
         },
     },
