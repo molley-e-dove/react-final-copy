@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeItem, updateQuantity } from './CartSlice';
+import { addItem, removeItem, updateQuantity, decreaseQuantity, } from './CartSlice';
 import './CartItem.css';
 
 const CartItem = ({ onContinueShopping }) => {
@@ -9,7 +9,14 @@ const CartItem = ({ onContinueShopping }) => {
 
   // Calculate total amount for all products in the cart
   const calculateTotalAmount = () => {
- 
+    console.log("Hello");
+    let totalamount = 0;
+    cart.forEach((item) => {
+        var cost = item.cost.slice(1);
+      totalamount += item.quantity * cost;
+
+    });
+    return totalamount;
   };
 
   const handleContinueShopping = (e) => {
@@ -19,17 +26,22 @@ const CartItem = ({ onContinueShopping }) => {
 
 
   const handleIncrement = (item) => {
+    dispatch(updateQuantity(item));
   };
 
   const handleDecrement = (item) => {
-   
+    dispatch(decreaseQuantity(item));
   };
 
   const handleRemove = (item) => {
+    dispatch(removeItem(item));
   };
 
   // Calculate total cost based on quantity for an item
   const calculateTotalCost = (item) => {
+    var cost = item.cost.slice(1);
+    return item.quantity * cost;
+
   };
 
   return (
@@ -40,8 +52,9 @@ const CartItem = ({ onContinueShopping }) => {
           <div className="cart-item" key={item.name}>
             <img className="cart-item-image" src={item.image} alt={item.name} />
             <div className="cart-item-details">
-              <div className="cart-item-name">{item.name}</div>
-              <div className="cart-item-cost">{item.cost}</div>
+                <div className="cart-item-name">{item.name}</div>
+                <div className="cart-item-cost">{item.cost}</div>
+                <div className='product-description'> {item.description} </div>
               <div className="cart-item-quantity">
                 <button className="cart-item-button cart-item-button-dec" onClick={() => handleDecrement(item)}>-</button>
                 <span className="cart-item-quantity-value">{item.quantity}</span>
