@@ -15,6 +15,13 @@ export const CartSlice = createSlice({
             state.items.push({ name, image, cost, quantity: 1 });
         }
     },
+    calculatetotalcount: (state, action) => {
+        let totalcount = 0;
+        const {name, quantity} = action.payload;
+        const itemtoaddquantity = state.items.find(name => item.name === name)
+        totalcount += itemtoaddquantity.quantity;
+        return totalcount;
+    },
     removeItem: (state, action) => {
         state.items = state.items.filter(item => item.name !== action.payload);
         
@@ -44,6 +51,6 @@ export const CartSlice = createSlice({
   },
 });
 
-export const { addItem, removeItem, updateQuantity, decreaseQuantity, TotalAmount } = CartSlice.actions;
+export const { addItem, removeItem, updateQuantity, decreaseQuantity, TotalAmount, calculatetotalcount } = CartSlice.actions;
 
 export default CartSlice.reducer;

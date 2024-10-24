@@ -18,7 +18,17 @@ const CartItem = ({ onContinueShopping }) => {
     });
     return totalamount;
   };
+  const calculatetotalcount = () => {
+    console.log("Add one");
+    let totalcount = 0;
+    if(cart) {
+        cart.forEach((item) => {
+            totalcount += item.quantity;
+        })
+        return totalcount;
+    }
 
+  }
   const handleContinueShopping = (e) => {
    
   };
@@ -45,8 +55,11 @@ const CartItem = ({ onContinueShopping }) => {
   };
 
   return (
+    
     <div className="cart-container">
-      <h2 style={{ color: 'black' }}>Total Cart Amount: ${calculateTotalAmount()}</h2>
+        <h2 style={{ color: 'black' }}>Total Cart Amount: ${calculateTotalAmount()}</h2>
+        <h2 className = 'cart' style={{ color: 'black' }}>Total Cart Count: {calculatetotalcount()}</h2>
+
       <div>
         {cart.map(item => (
           <div className="cart-item" key={item.name}>
@@ -75,6 +88,7 @@ const CartItem = ({ onContinueShopping }) => {
     </div>
   );
 };
+export const {calculatetotalcount}  = CartItem.actions;
 
 export default CartItem;
 
