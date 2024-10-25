@@ -9,7 +9,6 @@ const CartItem = ({ onContinueShopping }) => {
 
   // Calculate total amount for all products in the cart
   const calculateTotalAmount = () => {
-    console.log("Hello");
     let totalamount = 0;
     cart.forEach((item) => {
         var cost = item.cost.slice(1);
@@ -19,12 +18,12 @@ const CartItem = ({ onContinueShopping }) => {
     return totalamount;
   };
   const calculatetotalcount = () => {
-    console.log("Add one");
     let totalcount = 0;
     if(cart) {
         cart.forEach((item) => {
             totalcount += item.quantity;
         })
+        console.log(totalcount);
         return totalcount;
     }
 
