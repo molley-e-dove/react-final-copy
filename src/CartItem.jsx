@@ -60,7 +60,7 @@ const CartItem = ({ onContinueShopping }) => {
         <h2 className = 'cart' style={{ color: 'black' }}>Total Cart Count: {calculatetotalcount()}</h2>
 
       <div>
-        {cart.map(item => (
+        {cart.map((item, index) => (
           <div className="cart-item" key={item.name}>
             <img className="cart-item-image" src={item.image} alt={item.name} />
             <div className="cart-item-details">
@@ -73,7 +73,7 @@ const CartItem = ({ onContinueShopping }) => {
                 <button className="cart-item-button cart-item-button-inc" onClick={() => handleIncrement(item)}>+</button>
               </div>
               <div className="cart-item-total">Total: ${calculateTotalCost(item)}</div>
-              <button className="cart-item-delete" onClick={() => handleRemove(item)}>Delete</button>
+              <button className="cart-item-delete" onClick={() => handleRemove(index)}>Delete</button>
             </div>
           </div>
         ))}

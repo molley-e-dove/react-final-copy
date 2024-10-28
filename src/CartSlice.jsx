@@ -20,11 +20,11 @@ export const CartSlice = createSlice({
         state.totalcount ++;
         console.log(totalcount);
     },
-    removeItem: (state, action) => {
-        state.items = state.items.filter(item => item.name !== action.payload);
-        
-
-
+    //this works now!
+    removeItem: (state, index) => {
+        const newItems = [...state.items];
+        newItems.splice(index, 1);
+        state.items = newItems;
 
         //return state.items !== action.target.value;
     },
