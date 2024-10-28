@@ -246,21 +246,20 @@ const handlePlantsClick = (e) => {
     setShowCart(false); // Hide the cart when navigating to About Us
 };
 
-   const handleContinueShopping = (e) => {
+   const continueshopping = (e) => {
     e.preventDefault();
     setShowCart(true);
   };
   const [addedToCart, setAddedToCart] = useState({});
 
   const handleAddToCart = (product) => {
+    
     dispatch(addItem(product));
     setcount(count + 1);
     setAddedToCart((prevState) => ({
         ...prevState,
         [product.name]: true,
     }));
-
-
   }
 
     return (
@@ -304,7 +303,7 @@ const handlePlantsClick = (e) => {
             ))}
         </div>
  ) :  (
-    <CartItem onContinueShopping={handleContinueShopping}/>
+    <CartItem onContinueShopping={continueshopping}/>
 )}
     </div>
     );
