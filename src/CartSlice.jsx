@@ -16,7 +16,7 @@ export const CartSlice = createSlice({
         }
     },
     calculatetotalcount: (state, action) => {
-        let totalcount = 4;
+        let totalcount = 0;
         state.totalcount ++;
         console.log(totalcount);
     },
@@ -49,6 +49,12 @@ export const CartSlice = createSlice({
   },
 });
 
-export const { addItem, removeItem, updateQuantity, decreaseQuantity, TotalAmount, calculatetotalcount } = CartSlice.actions;
+export const {
+     addItem, 
+     removeItem, 
+     updateQuantity, 
+     decreaseQuantity, 
+     TotalAmount, 
+     calculatetotalcount } = CartSlice.actions;
 
 export default CartSlice.reducer;

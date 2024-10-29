@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState,useEffect } from 'react';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { addItem, removeItem, updateQuantity, decreaseQuantity, } from './CartSlice';
 import './CartItem.css';
@@ -28,11 +29,9 @@ const CartItem = ({ onContinueShopping }) => {
         return totalcount;
     }
 
-  }
+  };
   const handleContinueShopping = (e) => {
-    
-
-   
+    onContinueShopping(e);
   };
 
 
@@ -47,6 +46,9 @@ const CartItem = ({ onContinueShopping }) => {
 
   const handleRemove = (item) => {
     dispatch(removeItem(item));
+  };
+  const handleCheckoutShopping = () => {
+    alert("Functionality to be added for future reference");
   };
 
   // Calculate total cost based on quantity for an item
@@ -85,7 +87,7 @@ const CartItem = ({ onContinueShopping }) => {
       <div className="continue_shopping_btn">
         <button className="get-started-button" onClick={(e) => handleContinueShopping(e)}>Continue Shopping</button>
         <br />
-        <button className="get-started-button1">Checkout</button>
+        <button className="get-started-button1" onClick={ (e) => handleCheckoutShopping(e)}>Checkout</button>
       </div>
     </div>
   );

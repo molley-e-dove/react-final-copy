@@ -247,10 +247,11 @@ const handlePlantsClick = (e) => {
     setShowCart(false); // Hide the cart when navigating to About Us
 };
 
-   const continueshopping = (e) => {
+const continueshopping = (e) => {
     e.preventDefault();
-    setShowCart(true);
-  };
+    setShowCart(false);
+    setShowPlants(true);
+};
   const [addedToCart, setAddedToCart] = useState({});
 
   const handleAddToCart = product => {
