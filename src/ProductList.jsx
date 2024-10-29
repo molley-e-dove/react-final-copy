@@ -9,6 +9,7 @@ function ProductList() {
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
     const dispatch = useDispatch();
     const [count, setcount] = useState(0);
+    const [disabledProducts, setDisabledProducts] = useState([]);
     const plantsArray = [
         {
             category: "Air Purifying Plants",
@@ -252,9 +253,11 @@ const handlePlantsClick = (e) => {
   };
   const [addedToCart, setAddedToCart] = useState({});
 
-  const handleAddToCart = (product) => {
+  const handleAddToCart = product => {
     
     dispatch(addItem(product));
+    setDisabledProducts([...disabledProducts, product.name]);
+
     setcount(count + 1);
     setAddedToCart((prevState) => ({
         ...prevState,
@@ -295,7 +298,10 @@ const handlePlantsClick = (e) => {
                         <div className='product-cost'> {plant.cost}</div>
                         <div className='product-description'> {plant.description} </div>
                         {/*Similarly like the above plant.name show other details like description and cost*/}
-                        <button  className="product-button" onClick={() => handleAddToCart(plant)}>Add to Cart</button>
+                        <button  className={`product-button ${disabledProducts.includes(plant.name) ? 'product-button added-to-cart' : ''}`}
+                         onClick={() => handleAddToCart(plant)}
+                         disabled={disabledProducts.includes(plant.name)}>
+                            Add to Cart</button>
                     </div>
                     ))}
                 </div>
