@@ -7,6 +7,7 @@ import './ProductList.css';
 
 const CartItem = ({ onContinueShopping }) => {
   const cart = useSelector(state => state.cart.items);
+  
   const dispatch = useDispatch();
 
   // Calculate total amount for all products in the cart
@@ -20,6 +21,7 @@ const CartItem = ({ onContinueShopping }) => {
     return totalamount;
   };
   const calculatetotalcount = () => {
+    
     let totalcount = 0;
     if(cart) {
         cart.forEach((item) => {
@@ -28,7 +30,6 @@ const CartItem = ({ onContinueShopping }) => {
         console.log(totalcount);
         return totalcount;
     }
-
   };
   const handleContinueShopping = (e) => {
     onContinueShopping(e);
