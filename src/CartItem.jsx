@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-
+import {handleRemoveFromCart} from './ProductList';
 import { useSelector, useDispatch } from 'react-redux';
 import { addItem, removeItem, updateQuantity, decreaseQuantity, } from './CartSlice';
 import './CartItem.css';
@@ -46,7 +46,7 @@ const CartItem = ({ onContinueShopping }) => {
   };
 
   const handleRemove = (item) => {
-    dispatch(removeItem(item));
+    dispatch(handleRemoveFromCart(item));
   };
   const handleCheckoutShopping = () => {
     alert("Functionality to be added for future reference");

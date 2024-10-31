@@ -274,6 +274,22 @@ const continueshopping = (e) => {
     }));
     
   }
+  const handleRemoveFromCart = (removedItem) => {
+    const [prevPlantsArray, setPlantsArray] = useState([]);
+    setPlantsArray((prevPlantsArray) => {
+        return prevPlantsArray.map((category) => {
+            return {
+                ...category,
+                plants: category.plants.map((plant) => {
+                    if(plant.name === removeItem) {
+                        return {...plant, added:false};
+                    }
+                    return plant;
+                }),
+            };
+        });
+    });
+  };
 
     return (
         <div>
@@ -318,11 +334,12 @@ const continueshopping = (e) => {
             </div>
             ))}
         </div>
- ) :  (
-    <CartItem onContinueShopping={continueshopping}/>
-)}
-    </div>
-    );
-}
+    ) :  (
+        <CartItem onContinueShopping={continueshopping}/>
+    )}
+        </div>
+        );
+};
+
 
 export default ProductList;
