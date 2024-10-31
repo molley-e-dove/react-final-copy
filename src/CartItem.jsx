@@ -96,5 +96,3 @@ const CartItem = ({ onContinueShopping }) => {
 export const {calculatetotalcount}  = CartItem.actions;
 
 export default CartItem;
-
-
