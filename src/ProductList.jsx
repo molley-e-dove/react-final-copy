@@ -7,7 +7,7 @@ import {
   updateQuantity,
   calculatetotalcount,
 } from "./CartSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export const handleRemoveFromCart = (removedItem) => {
   const [prevPlantsArray, setPlantsArray] = useState([]);
@@ -27,10 +27,15 @@ export const handleRemoveFromCart = (removedItem) => {
 };
 
 function ProductList() {
+  //instead of creating a separate piece of state to show the cartCount
+  //we want to pull from the existing variable which we know is in the store
+  //so useSelector to grab the cart items array
+  const newCartItems = useSelector((state) => state.cart.items);
   const [showCart, setShowCart] = useState(false);
   const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
   const dispatch = useDispatch();
-  const [cartcount, setcount] = useState(0);
+  //so we can remove this state now because we're going to populate it via the redux store
+  //const [cartcount, setcount] = useState(0);
   const [disabledProducts, setDisabledProducts] = useState([]);
   const plantsArray = [
     {
@@ -323,11 +328,23 @@ function ProductList() {
     dispatch(addItem(thisplant));
     setDisabledProducts([...disabledProducts, thisplant.name]);
 
-    setcount(cartcount + 1);
+    //and then we won't need to set this piece of state because it will be redundant since our store has the value
+    // setcount(cartcount + 1);
     setAddedToCart((prevState) => ({
       ...prevState,
       [thisplant.name]: true,
     }));
+  };
+
+  //because the total of all items' quantities is what we really want, we're going to
+  //iterate over the items array and sum the quantities
+  //we'll call this function in that <p> tag below that you used to show the state
+  const calculateCartCount = () => {
+    let cartCount = 0;
+    newCartItems.forEach((item) => {
+      cartCount = cartCount + item.quantity;
+    });
+    return cartCount;
   };
 
   return (
@@ -357,7 +374,7 @@ function ProductList() {
           <div>
             {" "}
             <a href="#" onClick={(e) => handleCartClick(e)} style={styleA}>
-              <p>{cartcount} </p>
+              <p>{calculateCartCount()} </p>
               <h1 className="cart">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
